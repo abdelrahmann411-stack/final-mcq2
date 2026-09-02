@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redox Titrations Study Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f9fc;
+            --card-bg: #ffffff;
+            --primary-color: #4a6fa5;
+            --primary-light: #eef2f7;
+            --accent-color: #6b8cce;
+            --text-color: #2c3e50;
+            --text-muted: #6c757d;
+            --success-bg: #e8f5e9;
+            --success-color: #2e7d32;
+            --error-bg: #ffebee;
+            --error-color: #c62828;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #4a6fa5, #6b8cce);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(74, 111, 165, 0.2);
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        /* Tabs Styling */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(74, 111, 165, 0.3);
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+            direction: ltr; /* Keeping questions in English as in source */
+            text-align: left;
+        }
+
+        .question-card.rtl-text {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .q-number {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .q-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* MCQ Options */
+        .options {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+
+        .options li {
+            margin-bottom: 8px;
+        }
+
+        .options label {
+            display: block;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .options label:hover {
+            background-color: var(--primary-light);
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        /* Buttons & Actions */
+        .btn-action {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .explanation-box.correct {
+            background-color: var(--success-bg);
+            color: var(--success-color);
+            border-right: 4px solid var(--success-color);
+        }
+
+        .explanation-box.incorrect {
+            background-color: var(--error-bg);
+            color: var(--error-color);
+            border-right: 4px solid var(--error-color);
+        }
+
+        .explanation-box.info {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            border-right: 4px solid var(--primary-color);
+        }
+
+        /* Motivational Banner */
+        .motivation-banner {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            color: #b78103;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .equation {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f1f3f5;
+            padding: 8px;
+            border-radius: 4px;
+            display: block;
+            margin: 8px 0;
+            direction: ltr;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Redox Titrations Study Hub 🧪</h1>
+        <p>أسئلة واختبارات شاملة مقسمة ومجابة مع شرح علمي وافٍ</p>
+    </header>
+
+    <div class="motivation-banner" id="motivation-msg">
+        🌟 "النجاح هو ممارسة خطوة بسيطة كل يوم.. واصل المذاكرة بثبات!"
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('mcq')">I. اختر من متعدد (MCQ)</button>
+        <button class="tab-btn" onclick="switchTab('tf')">III. صح أو خطأ (True/False)</button>
+        <button class="tab-btn" onclick="switchTab('complete')">II. أكمل الجمل (Complete)</button>
+        <button class="tab-btn" onclick="switchTab('reasons')">IV. علل (Give Reasons)</button>
+        <button class="tab-btn" onclick="switchTab('equations')">V. المعادلات (Equations)</button>
+        <button class="tab-btn" onclick="switchTab('principles')">VI & VII. المبادئ والمقارنات</button>
+    </div>
+
+    <!-- TAB 1: MCQ -->
+    <div id="tab-mcq" class="tab-content active">
+        <!-- Sample MCQ Questions with JS logic -->
+        <div id="mcq-container"></div>
+    </div>
+
+    <!-- TAB 2: TRUE / FALSE -->
+    <div id="tab-tf" class="tab-content">
+        <div id="tf-container"></div>
+    </div>
+
+    <!-- TAB 3: COMPLETE -->
+    <div id="tab-complete" class="tab-content">
+        <div id="complete-container"></div>
+    </div>
+
+    <!-- TAB 4: GIVE REASONS -->
+    <div id="tab-reasons" class="tab-content">
+        <div id="reasons-container"></div>
+    </div>
+
+    <!-- TAB 5: EQUATIONS -->
+    <div id="tab-equations" class="tab-content">
+        <div id="equations-container"></div>
+    </div>
+
+    <!-- TAB 6: PRINCIPLES -->
+    <div id="tab-principles" class="tab-content">
+        <div id="principles-container"></div>
+    </div>
+
+</div>
+
+<script>
+    // Motivational Messages Pool
+    const motivations = [
+        "🌟 'النجاح هو ممارسة خطوة بسيطة كل يوم.. واصل المذاكرة بثبات!'",
+        "💪 'كل سؤال تفهمه اليوم هو خطوة أقرب للتميز في الامتحان!'",
+        "💡 'التركيز والهدوء هما مفتاحك لفهم أعمق للمادة العلمية.'",
+        "🎓 'عقلك قادر على استيعاب المزيد، استمر في التحدي!'"
+    ];
+
+    function updateMotivation() {
+        const randomMsg = motivations[Math.floor(Math.random() * motivations.length)];
+        document.getElementById('motivation-msg').innerText = randomMsg;
+    }
+
+    // Tab Switching Logic
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        event.currentTarget.classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+        updateMotivation();
+    }
+
+    // 1. DATA FOR MCQ
+    const mcqData = [
+        {
+            q: "1. Oxidation is associated with .......... of the oxidation number.",
+            opts: ["(a) an increase", "(b) a decrease", "(c) not affected", "(d) None of these choices"],
+            ans: 0,
+            explain: "<b>الإجابة الصحيحة: (a) an increase</b><br>💡 <b>الشرح:</b> عملية الأكسدة (Oxidation) تعني فقدان إلكترونات، وبالتالي ينتج عنها زيادة في عدد الأكسدة (Oxidation Number)."
+        },
+        {
+            q: "2. An oxidizing agent is an electron .......... in redox reactions.",
+            opts: ["(a) donor", "(b) acceptor", "(c) precipitate", "(d) indicator"],
+            ans: 1,
+            explain: "<b>الإجابة الصحيحة: (b) acceptor</b><br>💡 <b>الشرح:</b> العامل المؤكسد (Oxidizing Agent) يحدث له اختزال عن طريق **اكتساب إلكترونات** (Electron Acceptor)."
+        },
+        {
+            q: "3. The reductant is .......... in redox reactions.",
+            opts: ["(a) reduced", "(b) oxidized", "(c) complexing agent", "(d) None of these choices"],
+            ans: 1,
+            explain: "<b>الإجابة الصحيحة: (b) oxidized</b><br>💡 <b>الشرح:</b> العامل المختزل (Reductant) يمنح إلكترونات للطرف الآخر وبالتالي يحدث له **أكسدة** (Oxidized)."
+        },
+        {
+            q: "4. The oxidation number of one carbon atom in glycerol (C3H8O3) is:",
+            opts: ["(a) -2", "(b) +2", "(c) -2/3", "(d) +1"],
+            ans: 2,
+            explain: "<b>الإجابة الصحيحة: (c) -2/3</b><br>💡 <b>الشرح:</b> بحساب أعداد الأكسدة: H = +1 (مجموعهم +8)، O = -2 (مجموعهم -6)، المركب متعادل 3C + 8 - 6 = 0  => 3C = -2 => C = -2/3."
+        },
+        {
+            q: "5. The oxidized form for the (Cr2O7 2- / Cr3+) system is:",
+            opts: ["(a) Cr2O7 2-", "(b) Cr3+", "(c) a precipitating agent", "(d) a complexing agent"],
+            ans: 0,
+            explain: "<b>الإجابة الصحيحة: (a) Cr2O7 2-</b><br>💡 <b>الشرح:</b> عدد أكسدة الكروم في Cr2O7 2- هو (+6) بينما في Cr3+ هو (+3). الصورة ذات عدد الأكسدة الأعلى هي الصورة المؤكسدة (Oxidized Form)."
+        },
+        {
+            q: "6. Li is a very strong ..........",
+            opts: ["(a) oxidizing agent", "(b) reducing agent", "(c) complexing agent", "(d) None of these choices"],
+            ans: 1,
+            explain: "<b>الإجابة الصحيحة: (b) reducing agent</b><br>💡 <b>الشرح:</b> الليثيوم (Li) يقع في أعلى سلسلة الجهود الكهرومائية ولديه أقل جهد اختزال قياسي (E°)، مما يجعله عامل مختزل قوي جداً."
+        },
+        {
+            q: "7. Zimmermann's reagent .......... the redox potential of (MnO4- / Mn2+) system.",
+            opts: ["(a) increases", "(b) decreases", "(c) does not affect", "(d) None of these choices"],
+            ans: 1,
+            explain: "<b>الإجابة الصحيحة: (b) decreases</b><br>💡 <b>الشرح:</b> كاشف زيمرمان يحتوي على MnSO4 و H3PO4، وجود زيادة من Mn2+ يخفض جهد الأكسدة للمنغنيز حسب معادلة نيرنست، لمنع أكسدة أيونات الكلوريد."
+        },
+        {
+            q: "8. Ceric sulfate has .......... standard potential (E°) than KMnO4.",
+            opts: ["(a) higher", "(b) lower", "(c) the same", "(d) None of these choices"],
+            ans: 1,
+            explain: "<b>الإجابة الصحيحة: (b) lower</b><br>💡 <b>الشرح:</b> الجهد القياسي للسيريك (Ce4+) أقل من البرمنجنات (KMnO4)."
+        },
+        {
+            q: "9. Vitamin C can be determined using .......... titration.",
+            opts: ["(a) iodometric", "(b) iodimetric", "(c) bromometric", "(d) None of these choices"],
+            ans: 1,
+            explain: "<b>الإجابة الصحيحة: (b) iodimetric</b><br>💡 <b>الشرح:</b> فيتامين C عامل مختزل قوي يتم تقديره بالمعايرة المباشرة مع محلول اليود القياسي (Iodimetric titration)."
+        },
+        {
+            q: "10. .......... is added to stabilize the iodonium ion in Lang's method.",
+            opts: ["(a) HCl", "(b) KCN", "(c) KSCN", "(d) None of these choices"],
+            ans: 1,
+            explain: "<b>الإجابة الصحيحة: (b) KCN</b><br>💡 <b>الشرح:</b> يضاف سيانيد البوتاسيوم KCN لتكوين معقد ثابت ICN ويمنع التفاعلات الجانبية لليود."
+        }
+    ];
+
+    function renderMCQ() {
+        const container = document.getElementById('mcq-container');
+        mcqData.forEach((data, idx) => {
+            let optsHTML = data.opts.map((opt, oIdx) => `
+                <li>
+                    <label>
+                        <input type="radio" name="mcq-${idx}" value="${oIdx}">
+                        ${opt}
+                    </label>
+                </li>
+            `).join('');
+
+            container.innerHTML += `
+                <div class="question-card">
+                    <span class="q-number">سؤال الاختيار من متعدد ${idx + 1}</span>
+                    <div class="q-text">${data.q}</div>
+                    <ul class="options">${optsHTML}</ul>
+                    <button class="btn-action" onclick="checkMCQ(${idx})">تحقق من الإجابة</button>
+                    <div class="explanation-box" id="mcq-exp-${idx}"></div>
+                </div>
+            `;
+        });
+    }
+
+    function checkMCQ(idx) {
+        const selected = document.querySelector(`input[name="mcq-${idx}"]:checked`);
+        const expBox = document.getElementById(`mcq-exp-${idx}`);
+        expBox.style.display = 'block';
+
+        if (!selected) {
+            expBox.className = 'explanation-box info';
+            expBox.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+            return;
+        }
+
+        if (parseInt(selected.value) === mcqData[idx].ans) {
+            expBox.className = 'explanation-box correct';
+            expBox.innerHTML = `🎉 <b>إجابة صحيحة! أحسنت.</b><br>${mcqData[idx].explain}`;
+        } else {
+            expBox.className = 'explanation-box incorrect';
+            expBox.innerHTML = `❌ <b>إجابة خاطئة. حاول مرة أخرى!</b><br>${mcqData[idx].explain}`;
+        }
+    }
+
+    // 2. DATA FOR TRUE / FALSE
+    const tfData = [
+        { q: "1. HCl can be used as acidifying agent in ceric titrations.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>💡 <b>الشرح:</b> كبريتات السيريك Ce(SO4)2 لا تؤكسد أيونات الكلوريد HCl في الظروف العادية، عكس برمنجنات البوتاسيوم." },
+        { q: "2. Ceric sulfate is a self-indicator titrant.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>💡 <b>الشرح:</b> كبريتات السيريك ليست دليلاً ذاتياً ممتازاً، ويفضل استخدام دليل اكسدة واختزال مثل Ferroin." },
+        { q: "3. K2Cr2O7 has higher standard potential than ceric sulfate.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>💡 <b>الشرح:</b> دايكرومات البوتاسيوم تمتلك جهد اختزال قياسي أقل مقارنة بالسيريك." },
+        { q: "4. K2Cr2O7 can be used as a strong oxidizing agent in both acidic and basic pH.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>💡 <b>الشرح:</b> تعمل الدايكرومات كعامل مؤكسد قوي في **الوسط الحمضي فقط**." },
+        { q: "5. In iodimetric methods, iodine acts as an oxidizing agent.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>💡 <b>الشرح:</b> اليود (I2) يعتبر عامل مؤكسد (Oxidizing Agent) ويتختزل إلى أيونات اليوديد (I-)." },
+        { q: "6. KCN is added in Lang's method to stabilize iodonium ion as ICN.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>💡 <b>الشرح:</b> يضاف سيانيد البوتاسيوم لتثبيت أيون الأيودونيوم على هيئة معقد ثابت ICN." }
+    ];
+
+    function renderTF() {
+        const container = document.getElementById('tf-container');
+        tfData.forEach((data, idx) => {
+            container.innerHTML += `
+                <div class="question-card">
+                    <span class="q-number">سؤال صح / خطأ ${idx + 1}</span>
+                    <div class="q-text">${data.q}</div>
+                    <div style="margin-bottom: 12px;">
+                        <button class="btn-action" style="background-color: #2e7d32; margin-right: 5px;" onclick="checkTF(${idx}, true)">صح (True ✔)</button>
+                        <button class="btn-action" style="background-color: #c62828;" onclick="checkTF(${idx}, false)">خطأ (False ✘)</button>
+                    </div>
+                    <div class="explanation-box" id="tf-exp-${idx}"></div>
+                </div>
+            `;
+        });
+    }
+
+    function checkTF(idx, userAns) {
+        const expBox = document.getElementById(`tf-exp-${idx}`);
+        expBox.style.display = 'block';
+
+        if (userAns === tfData[idx].ans) {
+            expBox.className = 'explanation-box correct';
+            expBox.innerHTML = `🎉 <b>إجابة صحيحة!</b><br>${tfData[idx].exp}`;
+        } else {
+            expBox.className = 'explanation-box incorrect';
+            expBox.innerHTML = `❌ <b>إجابة غير صحيحة.</b><br>${tfData[idx].exp}`;
+        }
+    }
+
+    // 3. DATA FOR COMPLETE
+    const completeData = [
+        { q: "1. Oxidation can be defined as .......... while reduction is ..........", exp: "<b>الإجابة:</b> Loss of electrons / Gain of electrons.<br>💡 <b>الشرح:</b> الأكسدة هي فقد إلكترونات، والاختزال هو اكتساب إلكترونات." },
+        { q: "2. The oxidation number of oxygen in hydrogen peroxide (H2O2) is .......... while for hydrogen in LiH is ..........", exp: "<b>الإجابة:</b> -1 / -1.<br>💡 <b>الشرح:</b> في الفوق أكسيد يكون الأكسجين -1، وفي هيدريدات فلزات المجموعة الأولى يكون الهيدروجين -1." },
+        { q: "3. Examples of self indicators in redox titrations are .......... and ..........", exp: "<b>الإجابة:</b> KMnO4 and Iodine (I2)." },
+        { q: "4. Zimmermann's reagent is composed of .......... , .......... and ..........", exp: "<b>الإجابة:</b> MnSO4, H2SO4, and H3PO4." }
+    ];
+
+    function renderComplete() {
+        const container = document.getElementById('complete-container');
+        completeData.forEach((data, idx) => {
+            container.innerHTML += `
+                <div class="question-card">
+                    <span class="q-number">سؤال إكمال الجملة ${idx + 1}</span>
+                    <div class="q-text">${data.q}</div>
+                    <button class="btn-action" onclick="toggleExp('comp-exp-${idx}')">إظهار الإجابة والشرح</button>
+                    <div class="explanation-box info" id="comp-exp-${idx}">${data.exp}</div>
+                </div>
+            `;
+        });
+    }
+
+    // 4. DATA FOR GIVE REASONS
+    const reasonsData = [
+        {
+            q: "1. The (MnO4- / Mn2+) system has lower oxidizing power in presence of MnSO4.",
+            exp: "<b>السبب والشرح:</b><br>حسب معادلة نيرنست (Nernst Equation)، إضافة أيونات الناتِج (Mn2+) يزيد من تركيزها في المقام، مما يؤدي إلى خفض جهد القطب القياسي والتفاعلي للنظام وبالتالي تقل القوة المؤكسدة."
+        },
+        {
+            q: "2. HCl cannot be used for acidification of the medium in KMnO4 titrations.",
+            exp: "<b>السبب والشرح:</b><br>لأن البرمنجنات (KMnO4) عامل مؤكسد قوي جداً يستطيع أكسدة أيونات الكلوريد (Cl-) الموجودة في HCl وتحويلها إلى غاز الكلور (Cl2)، مما يستهلك جزءاً من البرمنجنات ويسبب خطأً بالزيادة في المعايرة."
+        },
+        {
+            q: "3. The reaction of KMnO4 and oxalic acid must be performed on hot (60-70 °C).",
+            exp: "<b>السبب والشرح:</b><br>لأن التفاعل بين البرمنجنات وحمض الأوكساليك بطيء جداً عند درجة حرارة الغرفة. التسخين يزيد من سرعة التفاعل حتى تتكون أيونات Mn2+ التي تعمل كعامل حفاز ذاتي (Autocatalyst)."
+        }
+    ];
+
+    function renderReasons() {
+        const container = document.getElementById('reasons-container');
+        reasonsData.forEach((data, idx) => {
+            container.innerHTML += `
+                <div class="question-card">
+                    <span class="q-number">سؤال علل (Give Reason) ${idx + 1}</span>
+                    <div class="q-text">${data.q}</div>
+                    <button class="btn-action" onclick="toggleExp('reas-exp-${idx}')">عرض الإجابة والتعليل العلمي</button>
+                    <div class="explanation-box info" id="reas-exp-${idx}">${data.exp}</div>
+                </div>
+            `;
+        });
+    }
+
+    // 5. DATA FOR EQUATIONS
+    const eqData = [
+        {
+            title: "1. Reaction of Permanganate with Chloride in strong acidic medium:",
+            eq: "2 MnO4- + 10 Cl- + 16 H+ ⇌ 2 Mn2+ + 5 Cl2 + 8 H2O",
+            exp: "💡 المنغنيز يكتسب 5 إلكترونات ويتحول إلى Mn2+ بينما يتأكسد الكلوريد إلى غاز الكلور Cl2."
+        },
+        {
+            title: "2. Reaction of Permanganate with Oxalate in strong acidic medium:",
+            eq: "2 MnO4- + 5 C2O4 2- + 16 H+ ⇌ 10 CO2 + 2 Mn2+ + 8 H2O",
+            exp: "💡 يتأكسد أيون الأوكسالات C2O4 2- إلى غاز ثاني أكسيد الكربون CO2."
+        },
+        {
+            title: "3. Reaction of Permanganate with Ferrous (Fe2+):",
+            eq: "MnO4- + 5 Fe2+ + 8 H+ ⇌ 5 Fe3+ + Mn2+ + 4 H2O",
+            exp: "💡 كل أيون برمنجنات يؤكسد 5 أيونات من الحديد الثنائي Fe2+ إلى حديد ثلاثي Fe3+."
+        }
+    ];
+
+    function renderEquations() {
+        const container = document.getElementById('equations-container');
+        eqData.forEach((data, idx) => {
+            container.innerHTML += `
+                <div class="question-card">
+                    <span class="q-number">معادلة موزونة ${idx + 1}</span>
+                    <div class="q-text">${data.title}</div>
+                    <span class="equation">${data.eq}</span>
+                    <div class="explanation-box info" style="display:block; margin-top:10px;">${data.exp}</div>
+                </div>
+            `;
+        });
+    }
+
+    // 6. DATA FOR PRINCIPLES
+    const principlesData = [
+        {
+            title: "المقارنة بين المعايرة اليودية المباشرة (Iodimetric) والغير مباشرة (Iodometric):",
+            exp: "<b>1. Iodimetric Titration:</b><br>- معايرة **مباشرة** باستخدام محلول قياسي من اليود (I2).<br>- اليود يعمل كـ **عامل مؤكسد**.<br>- تُستخدم لتقدير العوامل المختزلة القوية مثل Vitamin C و Thiosulfate.<br><br><b>2. Iodometric Titration:</b><br>- معايرة **غير مباشرة**.<br>- يتم إضافة زيادة من أيون اليوديد (I-) الذي يعمل كـ **عامل مختزل** لتكوين اليود (I2)، ثم يُعايَر اليود المتكون مع الثيوسلفات.<br>- تُستخدم لتقدير العوامل المؤكسدة القوية مثل KMnO4 و K2Cr2O7."
+        }
+    ];
+
+    function renderPrinciples() {
+        const container = document.getElementById('principles-container');
+        principlesData.forEach((data, idx) => {
+            container.innerHTML += `
+                <div class="question-card rtl-text">
+                    <span class="q-number">مفهوم ومقارنة علمية ${idx + 1}</span>
+                    <div class="q-text" style="direction:rtl;">${data.title}</div>
+                    <div class="explanation-box info" style="display:block;">${data.exp}</div>
+                </div>
+            `;
+        });
+    }
+
+    function toggleExp(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Initialize all components
+    window.onload = function() {
+        renderMCQ();
+        renderTF();
+        renderComplete();
+        renderReasons();
+        renderEquations();
+        renderPrinciples();
+    };
+</script>
+
+</body>
+</html>
