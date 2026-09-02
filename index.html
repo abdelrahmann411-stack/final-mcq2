@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redox Titrations Study Hub</title>
+    <title>Redox Titrations - Complete Study Questions</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f7f9fc;
+            --bg-color: #f4f7f6;
             --card-bg: #ffffff;
-            --primary-color: #4a6fa5;
-            --primary-light: #eef2f7;
-            --accent-color: #6b8cce;
-            --text-color: #2c3e50;
-            --text-muted: #6c757d;
-            --success-bg: #e8f5e9;
-            --success-color: #2e7d32;
-            --error-bg: #ffebee;
-            --error-color: #c62828;
+            --primary-color: #3b6998;
+            --primary-light: #ebf3fa;
+            --accent-color: #5285be;
+            --text-color: #2d3748;
+            --text-muted: #718096;
+            --success-bg: #e6fffa;
+            --success-color: #234e52;
+            --error-bg: #fff5f5;
+            --error-color: #742a2a;
             --border-color: #e2e8f0;
         }
 
@@ -31,36 +31,48 @@
         }
 
         .container {
-            max-width: 950px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            padding: 20px 0;
+            padding: 25px 15px;
             margin-bottom: 25px;
-            background: linear-gradient(135deg, #4a6fa5, #6b8cce);
+            background: linear-gradient(135deg, #3b6998, #5285be);
             color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(74, 111, 165, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(59, 105, 152, 0.2);
         }
 
         header h1 {
             margin: 0 0 10px 0;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
         }
 
         header p {
             margin: 0;
-            opacity: 0.9;
-            font-size: 1rem;
+            opacity: 0.95;
+            font-size: 1.05rem;
         }
 
-        /* Tabs Styling */
+        .motivation-banner {
+            background: #fffbea;
+            border: 1px solid #fce38a;
+            color: #744210;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        /* Tabs Navigation */
         .tabs {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 25px;
             justify-content: center;
         }
@@ -68,14 +80,14 @@
         .tab-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 10px 18px;
-            border-radius: 20px;
+            padding: 12px 20px;
+            border-radius: 25px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
             font-size: 0.95rem;
-            font-weight: 500;
+            font-weight: 700;
             color: var(--text-color);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .tab-btn:hover {
@@ -87,56 +99,59 @@
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
-            box-shadow: 0 2px 8px rgba(74, 111, 165, 0.3);
+            box-shadow: 0 4px 10px rgba(59, 105, 152, 0.25);
         }
 
-        /* Content Sections */
+        /* Tab Content */
         .tab-content {
             display: none;
         }
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Question Cards */
         .question-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 22px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
-            direction: ltr; /* Keeping questions in English as in source */
+            direction: ltr;
             text-align: left;
         }
 
-        .question-card.rtl-text {
+        .question-card.rtl-card {
             direction: rtl;
             text-align: right;
         }
 
-        .q-number {
+        .q-badge {
             display: inline-block;
             background-color: var(--primary-light);
             color: var(--primary-color);
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 15px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.85rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            direction: rtl;
         }
 
         .q-text {
             font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 15px;
-            line-height: 1.5;
+            line-height: 1.6;
+            color: #1a202c;
         }
 
         /* MCQ Options */
@@ -147,37 +162,41 @@
         }
 
         .options li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .options label {
             display: block;
-            padding: 10px 14px;
+            padding: 12px 16px;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
+            background-color: #fafafa;
         }
 
         .options label:hover {
             background-color: var(--primary-light);
+            border-color: var(--accent-color);
         }
 
         .options input[type="radio"] {
-            margin-right: 10px;
+            margin-right: 12px;
         }
 
-        /* Buttons & Actions */
+        /* Buttons */
         .btn-action {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 8px 18px;
-            border-radius: 6px;
+            padding: 9px 22px;
+            border-radius: 8px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
-            font-weight: 500;
-            transition: background 0.2s;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: background 0.2s ease;
+            direction: rtl;
         }
 
         .btn-action:hover {
@@ -188,10 +207,10 @@
         .explanation-box {
             display: none;
             margin-top: 15px;
-            padding: 12px 15px;
-            border-radius: 6px;
+            padding: 15px 18px;
+            border-radius: 8px;
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.7;
             direction: rtl;
             text-align: right;
         }
@@ -199,41 +218,32 @@
         .explanation-box.correct {
             background-color: var(--success-bg);
             color: var(--success-color);
-            border-right: 4px solid var(--success-color);
+            border-right: 5px solid #319795;
         }
 
         .explanation-box.incorrect {
             background-color: var(--error-bg);
             color: var(--error-color);
-            border-right: 4px solid var(--error-color);
+            border-right: 5px solid #e53e3e;
         }
 
         .explanation-box.info {
             background-color: var(--primary-light);
-            color: var(--primary-color);
-            border-right: 4px solid var(--primary-color);
+            color: #2b6cb0;
+            border-right: 5px solid var(--primary-color);
         }
 
-        /* Motivational Banner */
-        .motivation-banner {
-            background: #fff8e1;
-            border: 1px solid #ffe082;
-            color: #b78103;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .equation {
+        .equation-block {
             font-family: 'Courier New', Courier, monospace;
-            background-color: #f1f3f5;
-            padding: 8px;
-            border-radius: 4px;
+            background-color: #edf2f7;
+            padding: 12px;
+            border-radius: 6px;
             display: block;
-            margin: 8px 0;
+            margin: 10px 0;
             direction: ltr;
+            text-align: left;
+            font-weight: bold;
+            color: #2d3748;
         }
     </style>
 </head>
@@ -241,27 +251,26 @@
 
 <div class="container">
     <header>
-        <h1>Redox Titrations Study Hub 🧪</h1>
-        <p>أسئلة واختبارات شاملة مقسمة ومجابة مع شرح علمي وافٍ</p>
+        <h1>Redox Titrations Complete Bank 🧪</h1>
+        <p>بنك الأسئلة المتكامل والشامل لجميع أسئلة ورقة المراجعة (Study Questions)</p>
     </header>
 
     <div class="motivation-banner" id="motivation-msg">
-        🌟 "النجاح هو ممارسة خطوة بسيطة كل يوم.. واصل المذاكرة بثبات!"
+        ✨ "كل سؤال تحله الآن يضمن لك درجات أعلى وإتقاناً أكبر للمادة!"
     </div>
 
-    <!-- Tabs Navigation -->
+    <!-- Navigation Tabs -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('mcq')">I. اختر من متعدد (MCQ)</button>
-        <button class="tab-btn" onclick="switchTab('tf')">III. صح أو خطأ (True/False)</button>
-        <button class="tab-btn" onclick="switchTab('complete')">II. أكمل الجمل (Complete)</button>
-        <button class="tab-btn" onclick="switchTab('reasons')">IV. علل (Give Reasons)</button>
-        <button class="tab-btn" onclick="switchTab('equations')">V. المعادلات (Equations)</button>
+        <button class="tab-btn active" onclick="switchTab('mcq')">I. الاختيارات (22 سؤال)</button>
+        <button class="tab-btn" onclick="switchTab('tf')">III. صح أم خطأ (14 سؤال)</button>
+        <button class="tab-btn" onclick="switchTab('complete')">II. أكمل الجمل (25 سؤال)</button>
+        <button class="tab-btn" onclick="switchTab('reasons')">IV. التعليلات (14 سؤال)</button>
+        <button class="tab-btn" onclick="switchTab('equations')">V. معادلات الأكسدة والإختزال</button>
         <button class="tab-btn" onclick="switchTab('principles')">VI & VII. المبادئ والمقارنات</button>
     </div>
 
     <!-- TAB 1: MCQ -->
     <div id="tab-mcq" class="tab-content active">
-        <!-- Sample MCQ Questions with JS logic -->
         <div id="mcq-container"></div>
     </div>
 
@@ -289,24 +298,20 @@
     <div id="tab-principles" class="tab-content">
         <div id="principles-container"></div>
     </div>
-
 </div>
 
 <script>
-    // Motivational Messages Pool
     const motivations = [
-        "🌟 'النجاح هو ممارسة خطوة بسيطة كل يوم.. واصل المذاكرة بثبات!'",
-        "💪 'كل سؤال تفهمه اليوم هو خطوة أقرب للتميز في الامتحان!'",
-        "💡 'التركيز والهدوء هما مفتاحك لفهم أعمق للمادة العلمية.'",
-        "🎓 'عقلك قادر على استيعاب المزيد، استمر في التحدي!'"
+        "✨ 'كل سؤال تحله الآن يضمن لك درجات أعلى وإتقاناً أكبر للمادة!'",
+        "💡 'استمر بنفس الشغف.. التكرار والتطبيق هما السر الأكبر للفهم.'",
+        "🎯 'تذكر دائماً أن جهدك اليوم هو نجاحك وتفوقك غداً.'",
+        "🏆 'خطوة بخطوة ستصل للعلامة الكاملة بإذن الله!'"
     ];
 
     function updateMotivation() {
-        const randomMsg = motivations[Math.floor(Math.random() * motivations.length)];
-        document.getElementById('motivation-msg').innerText = randomMsg;
+        document.getElementById('motivation-msg').innerText = motivations[Math.floor(Math.random() * motivations.length)];
     }
 
-    // Tab Switching Logic
     function switchTab(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -316,68 +321,30 @@
         updateMotivation();
     }
 
-    // 1. DATA FOR MCQ
+    // 1. ALL MCQ QUESTIONS (1 to 22)
     const mcqData = [
-        {
-            q: "1. Oxidation is associated with .......... of the oxidation number.",
-            opts: ["(a) an increase", "(b) a decrease", "(c) not affected", "(d) None of these choices"],
-            ans: 0,
-            explain: "<b>الإجابة الصحيحة: (a) an increase</b><br>💡 <b>الشرح:</b> عملية الأكسدة (Oxidation) تعني فقدان إلكترونات، وبالتالي ينتج عنها زيادة في عدد الأكسدة (Oxidation Number)."
-        },
-        {
-            q: "2. An oxidizing agent is an electron .......... in redox reactions.",
-            opts: ["(a) donor", "(b) acceptor", "(c) precipitate", "(d) indicator"],
-            ans: 1,
-            explain: "<b>الإجابة الصحيحة: (b) acceptor</b><br>💡 <b>الشرح:</b> العامل المؤكسد (Oxidizing Agent) يحدث له اختزال عن طريق **اكتساب إلكترونات** (Electron Acceptor)."
-        },
-        {
-            q: "3. The reductant is .......... in redox reactions.",
-            opts: ["(a) reduced", "(b) oxidized", "(c) complexing agent", "(d) None of these choices"],
-            ans: 1,
-            explain: "<b>الإجابة الصحيحة: (b) oxidized</b><br>💡 <b>الشرح:</b> العامل المختزل (Reductant) يمنح إلكترونات للطرف الآخر وبالتالي يحدث له **أكسدة** (Oxidized)."
-        },
-        {
-            q: "4. The oxidation number of one carbon atom in glycerol (C3H8O3) is:",
-            opts: ["(a) -2", "(b) +2", "(c) -2/3", "(d) +1"],
-            ans: 2,
-            explain: "<b>الإجابة الصحيحة: (c) -2/3</b><br>💡 <b>الشرح:</b> بحساب أعداد الأكسدة: H = +1 (مجموعهم +8)، O = -2 (مجموعهم -6)، المركب متعادل 3C + 8 - 6 = 0  => 3C = -2 => C = -2/3."
-        },
-        {
-            q: "5. The oxidized form for the (Cr2O7 2- / Cr3+) system is:",
-            opts: ["(a) Cr2O7 2-", "(b) Cr3+", "(c) a precipitating agent", "(d) a complexing agent"],
-            ans: 0,
-            explain: "<b>الإجابة الصحيحة: (a) Cr2O7 2-</b><br>💡 <b>الشرح:</b> عدد أكسدة الكروم في Cr2O7 2- هو (+6) بينما في Cr3+ هو (+3). الصورة ذات عدد الأكسدة الأعلى هي الصورة المؤكسدة (Oxidized Form)."
-        },
-        {
-            q: "6. Li is a very strong ..........",
-            opts: ["(a) oxidizing agent", "(b) reducing agent", "(c) complexing agent", "(d) None of these choices"],
-            ans: 1,
-            explain: "<b>الإجابة الصحيحة: (b) reducing agent</b><br>💡 <b>الشرح:</b> الليثيوم (Li) يقع في أعلى سلسلة الجهود الكهرومائية ولديه أقل جهد اختزال قياسي (E°)، مما يجعله عامل مختزل قوي جداً."
-        },
-        {
-            q: "7. Zimmermann's reagent .......... the redox potential of (MnO4- / Mn2+) system.",
-            opts: ["(a) increases", "(b) decreases", "(c) does not affect", "(d) None of these choices"],
-            ans: 1,
-            explain: "<b>الإجابة الصحيحة: (b) decreases</b><br>💡 <b>الشرح:</b> كاشف زيمرمان يحتوي على MnSO4 و H3PO4، وجود زيادة من Mn2+ يخفض جهد الأكسدة للمنغنيز حسب معادلة نيرنست، لمنع أكسدة أيونات الكلوريد."
-        },
-        {
-            q: "8. Ceric sulfate has .......... standard potential (E°) than KMnO4.",
-            opts: ["(a) higher", "(b) lower", "(c) the same", "(d) None of these choices"],
-            ans: 1,
-            explain: "<b>الإجابة الصحيحة: (b) lower</b><br>💡 <b>الشرح:</b> الجهد القياسي للسيريك (Ce4+) أقل من البرمنجنات (KMnO4)."
-        },
-        {
-            q: "9. Vitamin C can be determined using .......... titration.",
-            opts: ["(a) iodometric", "(b) iodimetric", "(c) bromometric", "(d) None of these choices"],
-            ans: 1,
-            explain: "<b>الإجابة الصحيحة: (b) iodimetric</b><br>💡 <b>الشرح:</b> فيتامين C عامل مختزل قوي يتم تقديره بالمعايرة المباشرة مع محلول اليود القياسي (Iodimetric titration)."
-        },
-        {
-            q: "10. .......... is added to stabilize the iodonium ion in Lang's method.",
-            opts: ["(a) HCl", "(b) KCN", "(c) KSCN", "(d) None of these choices"],
-            ans: 1,
-            explain: "<b>الإجابة الصحيحة: (b) KCN</b><br>💡 <b>الشرح:</b> يضاف سيانيد البوتاسيوم KCN لتكوين معقد ثابت ICN ويمنع التفاعلات الجانبية لليود."
-        }
+        { q: "1. Oxidation is associated with .......... of the oxidation number.", opts: ["(a) an increase", "(b) a decrease", "(c) not affected", "(d) None of these choices"], ans: 0, exp: "<b>الإجابة الصحيحة: (a) an increase</b><br>الأكسدة تعني فقدان إلكترونات وبالتالي زيادة في عدد الأكسدة." },
+        { q: "2. An oxidizing agent is an electron .......... in redox reactions.", opts: ["(a) donor", "(b) acceptor", "(c) precipitate", "(d) indicator"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) acceptor</b><br>العامل المؤكسد يكتسب الإلكترونات (Acceptor)." },
+        { q: "3. The reductant is .......... in redox reactions.", opts: ["(a) reduced", "(b) oxidized", "(c) complexing agent", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) oxidized</b><br>العامل المختزل (Reductant) يفقد إلكترونات ويحدث له أكسدة." },
+        { q: "4. The oxidation number of one carbon atom in glycerol (C3H8O3) is:", opts: ["(a) -2", "(b) +2", "(c) -2/3", "(d) +1"], ans: 2, exp: "<b>الإجابة الصحيحة: (c) -2/3</b><br>3C + 8(+1) + 3(-2) = 0  => 3C = -2 => C = -2/3." },
+        { q: "5. The oxidized form for the (Cr2O7 2- / Cr3+) system is:", opts: ["(a) Cr2O7 2-", "(b) Cr3+", "(c) a precipitating agent", "(d) a complexing agent"], ans: 0, exp: "<b>الإجابة الصحيحة: (a) Cr2O7 2-</b><br>لأن الكروم فيها يمتلك عدد أكسدة أعلى (+6) مقارنة بـ (+3)." },
+        { q: "6. The redox system with high E has high tendency to be ...........", opts: ["(a) an oxidizing agent", "(b) a reducing agent", "(c) a precipitating agent", "(d) a complexing agent"], ans: 0, exp: "<b>الإجابة الصحيحة: (a) an oxidizing agent</b><br>ارتفاع قيمة الجهد E يعني تمسكاً أعلى بالإلكترونات وبالتالي عامل مؤكسد أقوى." },
+        { q: "7. Li is a very strong ..........", opts: ["(a) oxidizing agent", "(b) reducing agent", "(c) complexing agent", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) reducing agent</b><br>الليثيوم عامل مختزل قوي جداً ولديه أرقام جهد قياسية منخفضة للغاية." },
+        { q: "8. Addition of excess Fe2+ to (Fe3+/Fe2+) system will ....... its reduction potential.", opts: ["(a) increase", "(b) decrease", "(c) not affect", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) decrease</b><br>زيادة الناتِج في المقام حسب معادلة نيرنست يقلل جهد الاختزال." },
+        { q: "9. Addition of excess I- to the half-reaction: I2 + 2 e- = 2I- (E°=0.54) will ....... its potential.", opts: ["(a) increase", "(b) decrease", "(c) not affect", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) decrease</b><br>زيادة تركيز أيونات اليوديد في الناتج تقلل من جهد القطب." },
+        { q: "10. The number of electrons gained by KMnO4 at neutral pH is:", opts: ["(a) 3", "(b) 4", "(c) 5", "(d) 6"], ans: 0, exp: "<b>الإجابة الصحيحة: (a) 3</b><br>في الوسط المتعادل تتحول البرمنجنات MnO4- (+7) إلى MnO2 (+4) باكتساب 3 إلكترونات." },
+        { q: "11. Zimmermann's reagent .......... the redox potential of (MnO4- / Mn2+) system.", opts: ["(a) increases", "(b) decreases", "(c) does not affect", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) decreases</b><br>يحتوي كاشف زيمرمان على Mn2+ مما يقلل من جهد النظام ويمنع أكسدة Cl-." },
+        { q: "12. KMnO4 can be used at ..........", opts: ["(a) acidic pH", "(b) alkaline pH", "(c) Both of these choices", "(d) None of these choices"], ans: 2, exp: "<b>الإجابة الصحيحة: (c) Both of these choices</b><br>يمكن استخدام البرمنجنات في الوسط الحمضي والقلوي والمتعادل." },
+        { q: "13. The lower the standard potential (E°), the .......... is the oxidizing agent.", opts: ["(a) weaker", "(b) stronger", "(c) same strength", "(d) None of these choices"], ans: 0, exp: "<b>الإجابة الصحيحة: (a) weaker</b><br>كلما انخفض الجهد القياسي E° ضعفت القوة المؤكسدة." },
+        { q: "14. Which of the following factors can affect the potential of redox systems?", opts: ["(a) pH", "(b) common-ion effect", "(c) precipitation", "(d) All of these choices"], ans: 3, exp: "<b>الإجابة الصحيحة: (d) All of these choices</b><br>جميع هذه العوامل تؤثر على جهد النظام حسب معادلة نيرنست." },
+        { q: "15. Which of these factors can affect the standard potential (E°) of redox systems?", opts: ["(a) pH", "(b) common-ion effect", "(c) precipitation", "(d) None of these choices"], ans: 3, exp: "<b>الإجابة الصحيحة: (d) None of these choices</b><br>الجهد القياسي E° ثوابت ديناميكية حرارية لا تتغير بالتركيز أو الـ pH بل بدرجة الحرارة فقط." },
+        { q: "16. Ceric sulfate has .......... standard potential (E°) than KMnO4.", opts: ["(a) higher", "(b) lower", "(c) the same", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) lower</b><br>الجهد القياسي لـ Ce4+ أقل من البرمنجنات في الأوساط المعتادة." },
+        { q: "17. Which of the followings applies to KBrO3?", opts: ["(a) Used as a strong reducing agent", "(b) Highly volatile standard", "(c) Used as a source of bromine", "(d) None of these choices"], ans: 2, exp: "<b>الإجابة الصحيحة: (c) Used as a source of bromine</b><br>برومات البوتاسيوم تستخدم كمصدر للبروم بالمعايرة." },
+        { q: "18. Which of the following properties belongs to Ce(SO4)2?", opts: ["(a) Strong reducing agent", "(b) Self-indicator titrant", "(c) Can oxidize Cl into Cl2", "(d) Primary standard"], ans: 3, exp: "<b>الإجابة الصحيحة: (d) Primary standard</b><br>كبريتات السيريك مادة قياسية أولية فائقة الثبات." },
+        { q: "19. Which of the following methods can be used for the determination of FeSO4?", opts: ["(a) Direct titration with stand. KMnO4", "(b) Direct titration with stand. Ce(SO4)2", "(c) Direct titration with stand. K2Cr2O7", "(d) All of these choices"], ans: 3, exp: "<b>الإجابة الصحيحة: (d) All of these choices</b><br>يمكن استخدام جميع هذه المؤكسدات القوية لمعايرة الحديد الثنائي." },
+        { q: "20. Which of the following properties belongs to K2Cr2O7?", opts: ["(a) Weak oxidizing agent", "(b) Self-indicator titrant", "(c) Can oxidize Cl into Cl2", "(d) Primary standard"], ans: 3, exp: "<b>الإجابة الصحيحة: (d) Primary standard</b><br>ثنائي كرومات البوتاسيوم مركب نقي وثابت ومادة قياسية أولية." },
+        { q: "21. Vitamin C can be determined using .......... titration.", opts: ["(a) iodometric", "(b) iodimetric", "(c) bromometric", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) iodimetric</b><br>يتم تقدير فيتامين ج بالمعايرة المباشرة مع اليود Iodimetric." },
+        { q: "22. .......... is added to stabilize the iodonium ion in Lang's method.", opts: ["(a) HCl", "(b) KCN", "(c) KSCN", "(d) None of these choices"], ans: 1, exp: "<b>الإجابة الصحيحة: (b) KCN</b><br>يضاف سيانيد البوتاسيوم في طريقة لانغ لتثبيت أيون الأيودونيوم على هيئة ICN." }
     ];
 
     function renderMCQ() {
@@ -394,7 +361,7 @@
 
             container.innerHTML += `
                 <div class="question-card">
-                    <span class="q-number">سؤال الاختيار من متعدد ${idx + 1}</span>
+                    <span class="q-badge">سؤال الاختيار من متعدد ${idx + 1}</span>
                     <div class="q-text">${data.q}</div>
                     <ul class="options">${optsHTML}</ul>
                     <button class="btn-action" onclick="checkMCQ(${idx})">تحقق من الإجابة</button>
@@ -411,27 +378,35 @@
 
         if (!selected) {
             expBox.className = 'explanation-box info';
-            expBox.innerHTML = '⚠️ الرجاء اختيار إجابة أولاً.';
+            expBox.innerHTML = '⚠️ الرجاء اختيار إجابة من القائمة أولاً.';
             return;
         }
 
         if (parseInt(selected.value) === mcqData[idx].ans) {
             expBox.className = 'explanation-box correct';
-            expBox.innerHTML = `🎉 <b>إجابة صحيحة! أحسنت.</b><br>${mcqData[idx].explain}`;
+            expBox.innerHTML = `🎉 <b>إجابة صحيحة! أحسنت.</b><br>${mcqData[idx].exp}`;
         } else {
             expBox.className = 'explanation-box incorrect';
-            expBox.innerHTML = `❌ <b>إجابة خاطئة. حاول مرة أخرى!</b><br>${mcqData[idx].explain}`;
+            expBox.innerHTML = `❌ <b>إجابة خاطئة.</b><br>${mcqData[idx].exp}`;
         }
     }
 
-    // 2. DATA FOR TRUE / FALSE
+    // 2. ALL TRUE / FALSE QUESTIONS (1 to 14)
     const tfData = [
-        { q: "1. HCl can be used as acidifying agent in ceric titrations.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>💡 <b>الشرح:</b> كبريتات السيريك Ce(SO4)2 لا تؤكسد أيونات الكلوريد HCl في الظروف العادية، عكس برمنجنات البوتاسيوم." },
-        { q: "2. Ceric sulfate is a self-indicator titrant.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>💡 <b>الشرح:</b> كبريتات السيريك ليست دليلاً ذاتياً ممتازاً، ويفضل استخدام دليل اكسدة واختزال مثل Ferroin." },
-        { q: "3. K2Cr2O7 has higher standard potential than ceric sulfate.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>💡 <b>الشرح:</b> دايكرومات البوتاسيوم تمتلك جهد اختزال قياسي أقل مقارنة بالسيريك." },
-        { q: "4. K2Cr2O7 can be used as a strong oxidizing agent in both acidic and basic pH.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>💡 <b>الشرح:</b> تعمل الدايكرومات كعامل مؤكسد قوي في **الوسط الحمضي فقط**." },
-        { q: "5. In iodimetric methods, iodine acts as an oxidizing agent.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>💡 <b>الشرح:</b> اليود (I2) يعتبر عامل مؤكسد (Oxidizing Agent) ويتختزل إلى أيونات اليوديد (I-)." },
-        { q: "6. KCN is added in Lang's method to stabilize iodonium ion as ICN.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>💡 <b>الشرح:</b> يضاف سيانيد البوتاسيوم لتثبيت أيون الأيودونيوم على هيئة معقد ثابت ICN." }
+        { q: "1. HCl can be used as acidifying agent in ceric titrations.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>لأن السيريك لا يؤكسد الكلوريد تحت ظروف التفاعل المعتادة." },
+        { q: "2. Ceric sulfate is a self-indicator titrant.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>تغير لونه من الأصفر إلى العديم ليس حاداً كفاية ويفضل استخدام دليل كـ Ferroin." },
+        { q: "3. K2Cr2O7 has higher standard potential than ceric sulfate.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>جهد الدايكرومات القياسي أقل من السيريك." },
+        { q: "4. K2Cr2O7 can be used as a strong oxidizing agent in both acidic and basic pH.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>تستعمل كعامل مؤكسد في الوسط الحمضي فقط." },
+        { q: "5. K2Cr2O7 is a self-indicator titrant used in redox titrations.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>لون Cr3+ الأخضر يمنع تمييز نقطة النهاية، لذا تحتاج لدليل خارجي مثل Diphenylamine." },
+        { q: "6. Fe2+ can be titrated with K2Cr2O7 in presence of HCl and H3PO4 using diphenylamine indicator.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>وجود H3PO4 يخفض جهد Fe3+/Fe2+ ويجعل تغير لون الدليل واضحاً." },
+        { q: "7. In iodimetric methods, iodide acts as an oxidizing agent.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>في الطرق المباشرة (Iodimetric) اليود I2 هو من يعمل كمؤكسد وليس أيون اليوديد." },
+        { q: "8. In iodimetric methods, iodine acts as an oxidizing agent.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>اليود عامل مؤكسد يتختزل إلى أيونات اليوديد." },
+        { q: "9. In iodometric methods, iodide acts as a reducing agent.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>يتم إضافة زيادة من I- ليعمل كعامل مختزل تحرر اليود." },
+        { q: "10. In iodometric methods, iodine acts as a reducing agent.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>اليود المتحرر يتفاعل بالمعايرة مع الثيوسلفات." },
+        { q: "11. Antioxidants are substances acting as oxidizing agents.", ans: false, exp: "<b>الإجابة: (✘) خاطئة</b><br>مضادات الأكسدة تعمل كعوامل مختزلة (Reducing agents)." },
+        { q: "12. KCN is added in Lang's method to stabilize iodonium ion as ICN.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>يمنع التفاعلات الجانبية ويضمن استقرار أيون الأيودونيوم." },
+        { q: "13. Iodometric titration is used for the determination of oxidizing agents.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>طريقة غير مباشرة ممتازة لتقدير العوامل المؤكسدة." },
+        { q: "14. Iodometric titration can be used for the determination of KMnO4.", ans: true, exp: "<b>الإجابة: (✔) صحيحة</b><br>البرمنجنات مؤكسد قوي يؤكسد اليوديد إلى يود ثم نحدد اليود." }
     ];
 
     function renderTF() {
@@ -439,11 +414,11 @@
         tfData.forEach((data, idx) => {
             container.innerHTML += `
                 <div class="question-card">
-                    <span class="q-number">سؤال صح / خطأ ${idx + 1}</span>
+                    <span class="q-badge">سؤال صح / خطأ ${idx + 1}</span>
                     <div class="q-text">${data.q}</div>
                     <div style="margin-bottom: 12px;">
-                        <button class="btn-action" style="background-color: #2e7d32; margin-right: 5px;" onclick="checkTF(${idx}, true)">صح (True ✔)</button>
-                        <button class="btn-action" style="background-color: #c62828;" onclick="checkTF(${idx}, false)">خطأ (False ✘)</button>
+                        <button class="btn-action" style="background-color: #276749; margin-right: 5px;" onclick="checkTF(${idx}, true)">صح (True ✔)</button>
+                        <button class="btn-action" style="background-color: #9b2c2c;" onclick="checkTF(${idx}, false)">خطأ (False ✘)</button>
                     </div>
                     <div class="explanation-box" id="tf-exp-${idx}"></div>
                 </div>
@@ -460,16 +435,37 @@
             expBox.innerHTML = `🎉 <b>إجابة صحيحة!</b><br>${tfData[idx].exp}`;
         } else {
             expBox.className = 'explanation-box incorrect';
-            expBox.innerHTML = `❌ <b>إجابة غير صحيحة.</b><br>${tfData[idx].exp}`;
+            expBox.innerHTML = `❌ <b>إجابة خاطئة.</b><br>${tfData[idx].exp}`;
         }
     }
 
-    // 3. DATA FOR COMPLETE
+    // 3. ALL COMPLETE QUESTIONS (1 to 25)
     const completeData = [
-        { q: "1. Oxidation can be defined as .......... while reduction is ..........", exp: "<b>الإجابة:</b> Loss of electrons / Gain of electrons.<br>💡 <b>الشرح:</b> الأكسدة هي فقد إلكترونات، والاختزال هو اكتساب إلكترونات." },
-        { q: "2. The oxidation number of oxygen in hydrogen peroxide (H2O2) is .......... while for hydrogen in LiH is ..........", exp: "<b>الإجابة:</b> -1 / -1.<br>💡 <b>الشرح:</b> في الفوق أكسيد يكون الأكسجين -1، وفي هيدريدات فلزات المجموعة الأولى يكون الهيدروجين -1." },
-        { q: "3. Examples of self indicators in redox titrations are .......... and ..........", exp: "<b>الإجابة:</b> KMnO4 and Iodine (I2)." },
-        { q: "4. Zimmermann's reagent is composed of .......... , .......... and ..........", exp: "<b>الإجابة:</b> MnSO4, H2SO4, and H3PO4." }
+        { q: "1. Oxidation can be defined as .......... while reduction is ..........", exp: "<b>Loss of electrons / Gain of electrons</b>" },
+        { q: "2. Fe2+ + Ce4+ ⇌ .......... + ..........", exp: "<b>Fe3+ + Ce3+</b>" },
+        { q: "3. The oxidation number of oxygen in hydrogen peroxide is .......... while the oxidation number of hydrogen in LiH is ..........", exp: "<b>-1 / -1</b>" },
+        { q: "4. Equivalent weight in redox reactions = ..........", exp: "<b>Molecular weight / Number of electrons transferred</b>" },
+        { q: "5. For a redox reaction to proceed, the difference in the E of the reacting systems must be ≥ .......... V.", exp: "<b>0.2 - 0.4 V</b>" },
+        { q: "6. The factors affecting redox potential include .........., .......... and ..........", exp: "<b>pH, Common-ion effect, Precipitation / Complexation</b>" },
+        { q: "7. The methods for detection of end point in redox titration can be classified into: .......... and ..........", exp: "<b>Visual methods (Indicators) / Instrumental methods (Potentiometric)</b>" },
+        { q: "8. Examples of self indicators in redox titrations are .......... and ..........", exp: "<b>KMnO4 / Iodine (I2)</b>" },
+        { q: "9. An example of general redox indicators is .......... which is used for the detection of ..........", exp: "<b>Ferroin / End point in ceric titrations</b>" },
+        { q: "10. An example of specific redox indicators is .......... which is used for the detection of ..........", exp: "<b>Starch / Iodine (I2)</b>" },
+        { q: "11. The oxidation number of manganese atom after reduction of KMnO4 at strong alkaline pH is ..........", exp: "<b>+6 (Mn2O7 / Mangate ion MnO4 2-)</b>" },
+        { q: "12. Zimmermann's reagent is composed of .........., .......... and ..........", exp: "<b>MnSO4, H2SO4, and H3PO4</b>" },
+        { q: "13. Examples of primary standards used in redox titration are .......... and ..........", exp: "<b>K2Cr2O7, As2O3, Na2C2O4, Ce(SO4)2</b>" },
+        { q: "14. .......... is a redox standard that can be used as a stable source of Br2.", exp: "<b>KBrO3 (Potassium bromate)</b>" },
+        { q: "15. The color of the oxidized form of K2Cr2O7 is .......... while of the reduced form is ..........", exp: "<b>Orange / Green (Cr3+)</b>" },
+        { q: "16. Write the chemical formula for each of the following ions: tetrathionate .......... iodate ..........", exp: "<b>S4O6 2- / IO3-</b>" },
+        { q: "17. Iodine solution can be standardized against ..........", exp: "<b>Arsenic trioxide (As2O3) or Standard Sodium thiosulfate (Na2S2O3)</b>" },
+        { q: "18. Examples of indicators used for detection of iodine end point are .......... and ..........", exp: "<b>Starch / Carbon tetrachloride (CCl4)</b>" },
+        { q: "19. Iodometric titration is used for the determination of .......... agents.", exp: "<b>Oxidizing</b>" },
+        { q: "20. .......... reagent is used for the redox determination of water content.", exp: "<b>Karl Fischer</b>" },
+        { q: "21. Examples of reducing agents used as redox standards are .......... and ..........", exp: "<b>Sodium oxalate (Na2C2O4) / Arsenic trioxide (As2O3)</b>" },
+        { q: "22. Andrew's method is used for the determination of ..........", exp: "<b>Reducing agents using KIO3 in strong HCl (4-6 M)</b>" },
+        { q: "23. Lang's method is used for the determination of ..........", exp: "<b>Iodides in presence of KCN</b>" },
+        { q: "24. Karl Fischer Reagent is composed of .........., .........., .......... and ..........", exp: "<b>I2, SO2, Pyridine, and Methanol</b>" },
+        { q: "25. .......... is added to stabilize the iodonium ion in Lang's method.", exp: "<b>KCN</b>" }
     ];
 
     function renderComplete() {
@@ -477,29 +473,31 @@
         completeData.forEach((data, idx) => {
             container.innerHTML += `
                 <div class="question-card">
-                    <span class="q-number">سؤال إكمال الجملة ${idx + 1}</span>
+                    <span class="q-badge">سؤال إكمال الجملة ${idx + 1}</span>
                     <div class="q-text">${data.q}</div>
-                    <button class="btn-action" onclick="toggleExp('comp-exp-${idx}')">إظهار الإجابة والشرح</button>
+                    <button class="btn-action" onclick="toggleExp('comp-exp-${idx}')">إظهار الإجابة الكاملة</button>
                     <div class="explanation-box info" id="comp-exp-${idx}">${data.exp}</div>
                 </div>
             `;
         });
     }
 
-    // 4. DATA FOR GIVE REASONS
+    // 4. ALL GIVE REASONS QUESTIONS (1 to 14)
     const reasonsData = [
-        {
-            q: "1. The (MnO4- / Mn2+) system has lower oxidizing power in presence of MnSO4.",
-            exp: "<b>السبب والشرح:</b><br>حسب معادلة نيرنست (Nernst Equation)، إضافة أيونات الناتِج (Mn2+) يزيد من تركيزها في المقام، مما يؤدي إلى خفض جهد القطب القياسي والتفاعلي للنظام وبالتالي تقل القوة المؤكسدة."
-        },
-        {
-            q: "2. HCl cannot be used for acidification of the medium in KMnO4 titrations.",
-            exp: "<b>السبب والشرح:</b><br>لأن البرمنجنات (KMnO4) عامل مؤكسد قوي جداً يستطيع أكسدة أيونات الكلوريد (Cl-) الموجودة في HCl وتحويلها إلى غاز الكلور (Cl2)، مما يستهلك جزءاً من البرمنجنات ويسبب خطأً بالزيادة في المعايرة."
-        },
-        {
-            q: "3. The reaction of KMnO4 and oxalic acid must be performed on hot (60-70 °C).",
-            exp: "<b>السبب والشرح:</b><br>لأن التفاعل بين البرمنجنات وحمض الأوكساليك بطيء جداً عند درجة حرارة الغرفة. التسخين يزيد من سرعة التفاعل حتى تتكون أيونات Mn2+ التي تعمل كعامل حفاز ذاتي (Autocatalyst)."
-        }
+        { q: "1. The (MnO4- / Mn2+) system has lower oxidizing power in presence of MnSO4.", exp: "<b>السبب:</b> وجود أيونات Mn2+ الناتجة يقلل جهد القطب طبقاً لمعادلة نيرنست (Nernst Equation) مما يقلل القوة المؤكسدة للنظام." },
+        { q: "2. K2Cr2O7 cannot be used as a self-indicator.", exp: "<b>السبب:</b> لأن تغير اللون من البرتقالي إلى الأخضر الفاتح لـ Cr3+ ليس حاداً ولا يسهل تمييزه بوضوح عند نقطة التكافؤ." },
+        { q: "3. KMnO4 is not a primary standard.", exp: "<b>السبب:</b> لعدم نقائه التام وسهولة تفككه بوجود الضوء أو المواد العضوية وآثار MnO2 الحافزة." },
+        { q: "4. The reaction of KMnO4 is pH dependent.", exp: "<b>السبب:</b> لأن نواتج اختزال البرمنجنات تعتمد على حمضية الوسط (Mn2+ حمضي، MnO2 متعادل، MnO4 2- قلوي) وتتغير الإلكترونات المكتسبة." },
+        { q: "5. The reaction of KMnO4 and oxalic acid must be performed on hot.", exp: "<b>السبب:</b> للتغلب على بطء التفاعل عند البداية؛ حيث تسهم الحرارة وتكون أيونات Mn2+ في تسريع التفاعل كحافز ذاتي." },
+        { q: "6. HCl cannot be used for acidification of the medium in KMnO4 titrations.", exp: "<b>السبب:</b> لأن البرمنجنات تؤكسد أيونات Cl- إلى غاز الكلور Cl2 مما يسبب أخطاء في الحسابات." },
+        { q: "7. Addition of Zimmermann's reagent is necessary for the permanganometric determination of (Fe2+/Fe3+) mixture.", exp: "<b>السبب:</b> لمنع أكسدة HCl بالبرمنجنات ولتسهيل رؤية نقطة النهاية بوجود حمض الفوسفوريك." },
+        { q: "8. Use of SnCl2 and HgCl2 in the redox determination of (Fe2+/Fe3+) mixture.", exp: "<b>السبب:</b> لاختزال Fe3+ كلياً إلى Fe2+ باستخدام SnCl2، ثم التخلص من الزيادة عبر التفاعل مع HgCl2 لترسيب Hg2Cl2." },
+        { q: "9. Ceric sulfate is used only at acidic medium.", exp: "<b>السبب:</b> لمنع ترسيب أملأح السيريوم المائية على شكل Ce(OH)4 في الأوساط المعتدلة أو القلوية." },
+        { q: "10. Ceric sulfate is a primary standard.", exp: "<b>السبب:</b> لأنه مركب ثابت جداً، نقائه عالٍ، ومحاليله ثابتة لا تتأثر بالضوء." },
+        { q: "11. Direct preparation of standard Br2 solution is not possible.", exp: "<b>السبب:</b> لأن البروم مادة تطايرية جداً وصعبة التناول والوزن الدقيق." },
+        { q: "12. Standard iodine solution is prepared in a concentrated aqueous solution of potassium iodide.", exp: "<b>السبب:</b> لزيادة ذائبية اليود عبر تكوين معقد Triiodide ion (I3-) ومنع تطاير اليود." },
+        { q: "13. The low E or the low oxidizing power of (I2 / I-) system is sometimes advantageous.", exp: "<b>السبب:</b> يجعله يتفاعل باختيارية عالية مع العوامل المختزلة القوية دون التدخل مع المركبات الأخرى." },
+        { q: "14. Presence of pyridine and absolute methanol in Karl Fischer reagent.", exp: "<b>السبب:</b> الميثانول يذيب العينة، والبيريدين يعادل الأحماض الناتجة (SO3 و HI) ويوجه التفاعل لاستهلاك الماء بدقة." }
     ];
 
     function renderReasons() {
@@ -507,32 +505,23 @@
         reasonsData.forEach((data, idx) => {
             container.innerHTML += `
                 <div class="question-card">
-                    <span class="q-number">سؤال علل (Give Reason) ${idx + 1}</span>
+                    <span class="q-badge">سؤال علل (Give Reason) ${idx + 1}</span>
                     <div class="q-text">${data.q}</div>
-                    <button class="btn-action" onclick="toggleExp('reas-exp-${idx}')">عرض الإجابة والتعليل العلمي</button>
+                    <button class="btn-action" onclick="toggleExp('reas-exp-${idx}')">عرض الشرح والعلة العلمية</button>
                     <div class="explanation-box info" id="reas-exp-${idx}">${data.exp}</div>
                 </div>
             `;
         });
     }
 
-    // 5. DATA FOR EQUATIONS
+    // 5. ALL EQUATIONS (Question V: 1 to 6)
     const eqData = [
-        {
-            title: "1. Reaction of Permanganate with Chloride in strong acidic medium:",
-            eq: "2 MnO4- + 10 Cl- + 16 H+ ⇌ 2 Mn2+ + 5 Cl2 + 8 H2O",
-            exp: "💡 المنغنيز يكتسب 5 إلكترونات ويتحول إلى Mn2+ بينما يتأكسد الكلوريد إلى غاز الكلور Cl2."
-        },
-        {
-            title: "2. Reaction of Permanganate with Oxalate in strong acidic medium:",
-            eq: "2 MnO4- + 5 C2O4 2- + 16 H+ ⇌ 10 CO2 + 2 Mn2+ + 8 H2O",
-            exp: "💡 يتأكسد أيون الأوكسالات C2O4 2- إلى غاز ثاني أكسيد الكربون CO2."
-        },
-        {
-            title: "3. Reaction of Permanganate with Ferrous (Fe2+):",
-            eq: "MnO4- + 5 Fe2+ + 8 H+ ⇌ 5 Fe3+ + Mn2+ + 4 H2O",
-            exp: "💡 كل أيون برمنجنات يؤكسد 5 أيونات من الحديد الثنائي Fe2+ إلى حديد ثلاثي Fe3+."
-        }
+        { title: "1. Reaction with Cl- in strong acidic medium:", eq: "2 MnO4- + 10 Cl- + 16 H+ ⇌ 2 Mn2+ + 5 Cl2 + 8 H2O" },
+        { title: "2. Reaction with Oxalate (C2O4 2-) in strong acidic medium:", eq: "2 MnO4- + 5 C2O4 2- + 16 H+ ⇌ 10 CO2 + 2 Mn2+ + 8 H2O" },
+        { title: "3. Reaction with Ferrous (Fe2+) in strong acidic medium:", eq: "MnO4- + 5 Fe2+ + 8 H+ ⇌ 5 Fe3+ + Mn2+ + 4 H2O" },
+        { title: "4. Reaction with Hydrogen Peroxide (H2O2) in acidic medium:", eq: "2 MnO4- + 5 H2O2 + 6 H+ ⇌ 5 O2 + 2 Mn2+ + 8 H2O" },
+        { title: "5. Reaction of Stannous Chloride and Mercuric Chloride:", eq: "SnCl2 + 2 HgCl2 ⇌ SnCl4 + Hg2Cl2 (White ppt)" },
+        { title: "6. Reaction of Chlorine with Iodide:", eq: "Cl2 + 2 I- ⇌ 2 Cl- + I2" }
     ];
 
     function renderEquations() {
@@ -540,20 +529,27 @@
         eqData.forEach((data, idx) => {
             container.innerHTML += `
                 <div class="question-card">
-                    <span class="q-number">معادلة موزونة ${idx + 1}</span>
+                    <span class="q-badge">معادلة كيميائية موزونة ${idx + 1}</span>
                     <div class="q-text">${data.title}</div>
-                    <span class="equation">${data.eq}</span>
-                    <div class="explanation-box info" style="display:block; margin-top:10px;">${data.exp}</div>
+                    <span class="equation-block">${data.eq}</span>
                 </div>
             `;
         });
     }
 
-    // 6. DATA FOR PRINCIPLES
+    // 6. PRINCIPLES & COMPARISONS (Questions VI & VII)
     const principlesData = [
         {
-            title: "المقارنة بين المعايرة اليودية المباشرة (Iodimetric) والغير مباشرة (Iodometric):",
-            exp: "<b>1. Iodimetric Titration:</b><br>- معايرة **مباشرة** باستخدام محلول قياسي من اليود (I2).<br>- اليود يعمل كـ **عامل مؤكسد**.<br>- تُستخدم لتقدير العوامل المختزلة القوية مثل Vitamin C و Thiosulfate.<br><br><b>2. Iodometric Titration:</b><br>- معايرة **غير مباشرة**.<br>- يتم إضافة زيادة من أيون اليوديد (I-) الذي يعمل كـ **عامل مختزل** لتكوين اليود (I2)، ثم يُعايَر اليود المتكون مع الثيوسلفات.<br>- تُستخدم لتقدير العوامل المؤكسدة القوية مثل KMnO4 و K2Cr2O7."
+            title: "1. The principles of iodimetric and iodometric titrations:",
+            exp: "<b>• Iodimetric:</b> Direct titration with standard I2 for determining strong reductants (e.g. Vitamin C).<br><b>• Iodometric:</b> Indirect titration where excess I- is oxidized by an analyte to produce I2, which is then titrated with Thiosulfate."
+        },
+        {
+            title: "2. Comparison between Andrew's and Lang's methods:",
+            exp: "<b>• Andrew's Method:</b> Titration with KIO3 in strong HCl (4-6M) forming ICl.<br><b>• Lang's Method:</b> Addition of KCN to form stable ICN complexes and stabilize iodonium ion."
+        },
+        {
+            title: "3. Determination of Vitamin C & Water Content:",
+            exp: "<b>• Vitamin C:</b> Determined by direct Iodimetric titration using starch indicator.<br><b>• Water Content:</b> Determined using Karl Fischer titration (I2, SO2, Pyridine, Methanol)."
         }
     ];
 
@@ -561,9 +557,9 @@
         const container = document.getElementById('principles-container');
         principlesData.forEach((data, idx) => {
             container.innerHTML += `
-                <div class="question-card rtl-text">
-                    <span class="q-number">مفهوم ومقارنة علمية ${idx + 1}</span>
-                    <div class="q-text" style="direction:rtl;">${data.title}</div>
+                <div class="question-card rtl-card">
+                    <span class="q-badge">مفهوم ومقارنة علمية ${idx + 1}</span>
+                    <div class="q-text">${data.title}</div>
                     <div class="explanation-box info" style="display:block;">${data.exp}</div>
                 </div>
             `;
@@ -575,7 +571,6 @@
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
 
-    // Initialize all components
     window.onload = function() {
         renderMCQ();
         renderTF();
